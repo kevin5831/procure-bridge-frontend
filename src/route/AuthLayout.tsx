@@ -48,11 +48,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
           <div className="absolute inset-0 bg-brand-600/40 backdrop-blur-sm"></div>
         </motion.div>
 
-<<<<<<< HEAD
-        <div className="relative z-10 flex flex-col justify-between m-20">
-=======
         <div className="relative z-10 flex flex-col justify-between w-full h-full p-12">
->>>>>>> 2b2b553040948cf29cf73d40ef4004c9accf7f43
           <div>
             <motion.div
               initial={{ x: -20, opacity: 0 }}
