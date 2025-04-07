@@ -1,4 +1,3 @@
-
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 import { HorizontalNav } from "./HorizontalNav";
@@ -12,14 +11,18 @@ interface DefaultLayoutProps {
 
 export function DefaultLayout({ children }: DefaultLayoutProps) {
   const location = useLocation();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isRequestPanelOpen, setIsRequestPanelOpen] = useState(false);
-  
+
   // Show horizontal nav for both requests and grn sections
-  const showHorizontalNav = location.pathname.startsWith("/requests") || 
-                           location.pathname.startsWith("/grn");
-  
+  const showHorizontalNav =
+    location.pathname.startsWith("/requests") ||
+    location.pathname.startsWith("/grn");
+
+  const sidebarOpen = (open : boolean) => {
+    setIsSidebarOpen(open);
+  } 
   // Handle scroll effect for nav
   useEffect(() => {
     const handleScroll = () => {
@@ -43,10 +46,10 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Sidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
+      <Sidebar isOpen={isSidebarOpen} onOpenChange={sidebarOpen} />
       <div className="lg:pl-64 transition-all duration-300 ease-in-out">
-        <TopBar 
-          onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+        <TopBar
+          onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)}
           scrolled={scrolled}
           onCreateRequest={() => setIsRequestPanelOpen(true)}
         />
@@ -55,7 +58,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
           {children}
         </main>
       </div>
-      
+
       {/* Global create request panel that can be triggered from anywhere */}
       <CreateRequestSidePanel
         open={isRequestPanelOpen}
