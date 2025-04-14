@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://asseter.onrender.com/api';
+const API_URL = 'http://16.171.11.180';
 
 interface CompanyDto{
     name: string;
